@@ -21,7 +21,7 @@ body{
     color:white;
 }
 
-/* Full screen luxury background */
+/* Background */
 .background{
     position:fixed;
     width:100%;
@@ -31,7 +31,6 @@ body{
         url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=80');
     background-size:cover;
     background-position:center;
-    background-repeat:no-repeat;
     animation:zoomSlow 20s ease-in-out infinite alternate;
 }
 
@@ -40,7 +39,7 @@ body{
     to{transform:scale(1.08);}
 }
 
-/* Center content */
+/* Main Content */
 .content{
     position:absolute;
     top:50%;
@@ -59,15 +58,14 @@ body{
 
 h1{
     font-family:'Playfair Display', serif;
-    font-size:32px;
+    font-size:30px;
     letter-spacing:4px;
     color:#d4af37;
 }
 
 .names{
     margin-top:15px;
-    font-size:28px;
-    font-weight:500;
+    font-size:26px;
     letter-spacing:2px;
 }
 
@@ -78,12 +76,6 @@ h1{
     margin:20px auto;
 }
 
-.message{
-    font-size:15px;
-    line-height:1.7;
-    color:#e0e0e0;
-}
-
 button{
     margin-top:30px;
     padding:14px 35px;
@@ -92,7 +84,6 @@ button{
     background:transparent;
     color:#d4af37;
     font-weight:600;
-    letter-spacing:1px;
     cursor:pointer;
     transition:0.4s;
 }
@@ -102,16 +93,47 @@ button:hover{
     color:black;
 }
 
-.final{
-    margin-top:20px;
-    font-size:16px;
-    color:#d4af37;
+/* Reveal Photo Overlay */
+.overlay{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.95);
+    display:flex;
+    justify-content:center;
+    align-items:center;
     opacity:0;
+    visibility:hidden;
     transition:1s;
 }
 
-.final.show{
+.overlay.show{
     opacity:1;
+    visibility:visible;
+}
+
+.photo-box{
+    text-align:center;
+    animation:zoomIn 1s ease forwards;
+}
+
+@keyframes zoomIn{
+    from{transform:scale(0.7); opacity:0;}
+    to{transform:scale(1); opacity:1;}
+}
+
+.photo-box img{
+    width:80vw;
+    max-width:400px;
+    border-radius:20px;
+    border:3px solid #d4af37;
+    box-shadow:0 0 40px rgba(212,175,55,0.6);
+}
+
+.photo-box h2{
+    margin-top:20px;
+    font-family:'Playfair Display', serif;
+    color:#d4af37;
 }
 </style>
 </head>
@@ -121,29 +143,25 @@ button:hover{
 
 <div class="content">
     <h1>HAPPY WEDDING ANNIVERSARY</h1>
-
     <div class="names">Maruthi & Navya</div>
-
     <div class="gold-line"></div>
-
-    <div class="message">
-        A love that grows stronger with time.  
-        A bond that shines brighter than gold.  
-        May your journey together remain timeless and beautiful.
-    </div>
-
     <button onclick="celebrate()">CELEBRATE</button>
+</div>
 
-    <div class="final" id="final">
-        ✨ Forever. Always. Together. ✨
+<!-- Photo Reveal -->
+<div class="overlay" id="overlay">
+    <div class="photo-box">
+        <img src="https://picsum.photos/600/800" alt="Couple Photo">
+        <h2>Forever. Always. Together.</h2>
     </div>
 </div>
 
 <script>
 function celebrate(){
-    document.getElementById("final").classList.add("show");
 
-    let msg="Happy Wedding Anniversary Maruthi and Navya. May your love shine like gold forever.";
+    document.getElementById("overlay").classList.add("show");
+
+    let msg="Happy Wedding Anniversary Maruthi and Navya. May your love shine brighter with every passing year. Forever and always together.";
     let speech=new SpeechSynthesisUtterance(msg);
     speech.rate=0.95;
     speech.pitch=1;
