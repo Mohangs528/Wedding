@@ -5,64 +5,97 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Anniversary Maruthi & Navya</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
 body{
     margin:0;
     font-family:'Poppins', sans-serif;
-    background:linear-gradient(135deg,#1a1a1a,#2c2c2c);
+    overflow:hidden;
     color:white;
     text-align:center;
-    overflow-x:hidden;
+    background:linear-gradient(-45deg,#ff6a88,#ff99ac,#ffc3a0,#ffdde1);
+    background-size:400% 400%;
+    animation:gradientBG 10s ease infinite;
 }
 
-/* Golden Glow Animation */
-@keyframes glow{
-    0%{text-shadow:0 0 10px gold;}
-    50%{text-shadow:0 0 25px goldenrod;}
-    100%{text-shadow:0 0 10px gold;}
+@keyframes gradientBG{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
 }
 
-.container{
-    padding:50px 20px;
-    animation:fadeIn 2s ease-in;
+/* Floating Particles */
+.particle{
+    position:fixed;
+    width:6px;
+    height:6px;
+    background:gold;
+    border-radius:50%;
+    opacity:0.8;
+    animation:float 8s linear infinite;
 }
 
-@keyframes fadeIn{
-    from{opacity:0; transform:translateY(30px);}
-    to{opacity:1; transform:translateY(0);}
+@keyframes float{
+    from{transform:translateY(100vh);}
+    to{transform:translateY(-10vh);}
+}
+
+/* Glass Card */
+.card{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(15px);
+    padding:40px;
+    border-radius:25px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.3);
+    animation:fadeUp 2s ease;
+    width:90%;
+    max-width:500px;
+}
+
+@keyframes fadeUp{
+    from{opacity:0; transform:translate(-50%,-40%);}
+    to{opacity:1; transform:translate(-50%,-50%);}
 }
 
 h1{
-    font-family:'Playfair Display', serif;
-    font-size:50px;
-    color:gold;
-    animation:glow 3s infinite;
+    font-family:'Great Vibes', cursive;
+    font-size:48px;
+    margin:0;
 }
 
 .names{
-    font-size:28px;
-    margin-top:10px;
-    letter-spacing:2px;
+    font-size:26px;
+    margin:10px 0 20px;
+    font-weight:500;
 }
 
 .message{
-    max-width:600px;
-    margin:30px auto;
-    font-size:20px;
+    font-size:18px;
     line-height:1.6;
 }
 
-/* Image */
-.photo{
-    margin-top:30px;
+/* Heartbeat */
+.heart{
+    font-size:40px;
+    animation:beat 1s infinite;
 }
 
+@keyframes beat{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.2);}
+}
+
+/* Image */
 .photo img{
-    width:260px;
+    width:220px;
     border-radius:20px;
-    box-shadow:0 10px 30px rgba(255,215,0,0.4);
+    margin-top:20px;
+    box-shadow:0 0 30px rgba(255,255,255,0.6);
     transition:0.5s;
 }
 
@@ -72,60 +105,80 @@ h1{
 
 /* Button */
 button{
-    margin-top:30px;
-    padding:15px 35px;
-    background:gold;
+    margin-top:25px;
+    padding:12px 30px;
     border:none;
     border-radius:30px;
-    font-size:18px;
+    font-size:16px;
     cursor:pointer;
-    color:black;
+    background:white;
+    color:#ff4e73;
     transition:0.3s;
 }
 
 button:hover{
-    background:white;
+    background:#ff4e73;
+    color:white;
     transform:scale(1.1);
 }
 
 #surprise{
     display:none;
     margin-top:20px;
-    font-size:22px;
-    color:gold;
+    font-size:20px;
+    font-weight:500;
 }
 </style>
 </head>
 <body>
 
-<div class="container">
+<!-- Romantic Music -->
+<audio id="music" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+</audio>
+
+<div class="card">
     <h1>Happy Wedding Anniversary</h1>
     <div class="names">Maruthi ❤️ Navya</div>
+    <div class="heart">❤️</div>
 
     <div class="message">
-        A beautiful journey, built with love, trust and laughter.
-        May your bond shine brighter with every passing year.
-        Wishing you endless happiness and golden memories together.
+        Two hearts. One journey. Endless love.
+        May your beautiful story continue forever,
+        filled with laughter, trust and magical moments.
     </div>
 
     <div class="photo">
-        <img src="https://images.unsplash.com/photo-1520857014576-2c4f4c972b57" alt="Couple">
+        <img src="https://images.unsplash.com/photo-1520857014576-2c4f4c972b57">
     </div>
 
-    <button onclick="showSurprise()">Click for Special Wish</button>
+    <button onclick="surprise()">Tap for Special Surprise</button>
 
     <div id="surprise">
-        💛 May your love story continue forever like a timeless classic 💛
+        💖 Your Love Shines Brighter Every Year 💖
     </div>
 </div>
 
 <script>
-function showSurprise(){
+// Floating particles
+for(let i=0;i<30;i++){
+    let p=document.createElement("div");
+    p.className="particle";
+    p.style.left=Math.random()*100+"vw";
+    p.style.animationDuration=(5+Math.random()*5)+"s";
+    document.body.appendChild(p);
+}
+
+function surprise(){
     document.getElementById("surprise").style.display="block";
 
-    let msg="Happy Wedding Anniversary Maruthi and Navya. May your love shine like gold forever.";
+    // Start Music
+    document.getElementById("music").play();
+
+    // AI Voice
+    let msg="Happy Wedding Anniversary Maruthi and Navya. May your love grow more beautiful with every passing year.";
     let speech=new SpeechSynthesisUtterance(msg);
-    speech.rate=0.9;
+    speech.rate=0.95;
     speech.pitch=1;
     window.speechSynthesis.speak(speech);
 }
