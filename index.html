@@ -3,169 +3,131 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Love System Override</title>
+<title>Happy Anniversary Maruthi & Navya</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
 body{
     margin:0;
-    background:black;
-    overflow:hidden;
-    font-family:monospace;
-    color:#00ff00;
-}
-
-/* Matrix Canvas */
-canvas{
-    position:fixed;
-    top:0;
-    left:0;
-    z-index:-1;
-}
-
-/* Container */
-.container{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
+    font-family:'Poppins', sans-serif;
+    background:linear-gradient(135deg,#1a1a1a,#2c2c2c);
+    color:white;
     text-align:center;
+    overflow-x:hidden;
 }
 
-/* Glitch Effect */
-.glitch{
-    font-size:35px;
-    animation:glitch 1s infinite;
+/* Golden Glow Animation */
+@keyframes glow{
+    0%{text-shadow:0 0 10px gold;}
+    50%{text-shadow:0 0 25px goldenrod;}
+    100%{text-shadow:0 0 10px gold;}
 }
 
-@keyframes glitch{
-    0%{text-shadow:2px 2px red;}
-    25%{text-shadow:-2px -2px blue;}
-    50%{text-shadow:2px -2px lime;}
-    75%{text-shadow:-2px 2px cyan;}
-    100%{text-shadow:2px 2px red;}
+.container{
+    padding:50px 20px;
+    animation:fadeIn 2s ease-in;
 }
 
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(30px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+h1{
+    font-family:'Playfair Display', serif;
+    font-size:50px;
+    color:gold;
+    animation:glow 3s infinite;
+}
+
+.names{
+    font-size:28px;
+    margin-top:10px;
+    letter-spacing:2px;
+}
+
+.message{
+    max-width:600px;
+    margin:30px auto;
+    font-size:20px;
+    line-height:1.6;
+}
+
+/* Image */
+.photo{
+    margin-top:30px;
+}
+
+.photo img{
+    width:260px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(255,215,0,0.4);
+    transition:0.5s;
+}
+
+.photo img:hover{
+    transform:scale(1.05);
+}
+
+/* Button */
 button{
     margin-top:30px;
-    padding:15px 30px;
-    border:2px solid #00ff00;
-    background:black;
-    color:#00ff00;
+    padding:15px 35px;
+    background:gold;
+    border:none;
+    border-radius:30px;
     font-size:18px;
     cursor:pointer;
+    color:black;
+    transition:0.3s;
 }
 
 button:hover{
-    background:#00ff00;
-    color:black;
+    background:white;
+    transform:scale(1.1);
 }
 
-/* Popup */
-.popup{
+#surprise{
     display:none;
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    background:black;
-    border:2px solid #00ff00;
-    padding:20px;
-    text-align:center;
-    box-shadow:0 0 20px #00ff00;
-}
-
-.popup img{
-    width:250px;
-    border-radius:10px;
-    margin-top:10px;
-}
-
-/* Screen Shake */
-.shake{
-    animation:shake 0.5s;
-}
-
-@keyframes shake{
-    0%{transform:translate(0,0);}
-    25%{transform:translate(5px,5px);}
-    50%{transform:translate(-5px,5px);}
-    75%{transform:translate(5px,-5px);}
-    100%{transform:translate(0,0);}
+    margin-top:20px;
+    font-size:22px;
+    color:gold;
 }
 </style>
 </head>
 <body>
 
-<canvas id="matrix"></canvas>
-
 <div class="container">
-    <div class="glitch">SYSTEM LOVE PROTOCOL</div>
-    <p>Target: MARUTHI ❤️ NAVYA</p>
-    <button onclick="execute()">Execute Anniversary.exe</button>
-</div>
+    <h1>Happy Wedding Anniversary</h1>
+    <div class="names">Maruthi ❤️ Navya</div>
 
-<div class="popup" id="popup">
-    <h2>💚 ACCESS GRANTED 💚</h2>
-    <p>Happy Wedding Anniversary Maruthi & Navya 💖<br>
-    Your Love Firewall is Unbreakable 🔐<br>
-    Forever Connected 💚</p>
-    <img src="https://images.unsplash.com/photo-1520857014576-2c4f4c972b57">
+    <div class="message">
+        A beautiful journey, built with love, trust and laughter.
+        May your bond shine brighter with every passing year.
+        Wishing you endless happiness and golden memories together.
+    </div>
+
+    <div class="photo">
+        <img src="https://images.unsplash.com/photo-1520857014576-2c4f4c972b57" alt="Couple">
+    </div>
+
+    <button onclick="showSurprise()">Click for Special Wish</button>
+
+    <div id="surprise">
+        💛 May your love story continue forever like a timeless classic 💛
+    </div>
 </div>
 
 <script>
-// MATRIX EFFECT
-let canvas=document.getElementById("matrix");
-let ctx=canvas.getContext("2d");
+function showSurprise(){
+    document.getElementById("surprise").style.display="block";
 
-canvas.height=window.innerHeight;
-canvas.width=window.innerWidth;
-
-let letters="01MARUTHINAVYA";
-letters=letters.split("");
-
-let fontSize=16;
-let columns=canvas.width/fontSize;
-let drops=[];
-
-for(let x=0;x<columns;x++)
-drops[x]=1;
-
-function draw(){
-ctx.fillStyle="rgba(0,0,0,0.05)";
-ctx.fillRect(0,0,canvas.width,canvas.height);
-
-ctx.fillStyle="#0f0";
-ctx.font=fontSize+"px monospace";
-
-for(let i=0;i<drops.length;i++){
-let text=letters[Math.floor(Math.random()*letters.length)];
-ctx.fillText(text,i*fontSize,drops[i]*fontSize);
-
-if(drops[i]*fontSize>canvas.height && Math.random()>0.975)
-drops[i]=0;
-
-drops[i]++;
-}
-}
-setInterval(draw,33);
-
-// EXECUTE FUNCTION
-function execute(){
-
-// Screen shake
-document.body.classList.add("shake");
-setTimeout(()=>document.body.classList.remove("shake"),500);
-
-// Show popup
-document.getElementById("popup").style.display="block";
-
-// AI Voice
-let msg="Access Granted. Happy Wedding Anniversary Maruthi and Navya. Your love system is stronger than any firewall. Forever connected.";
-let speech=new SpeechSynthesisUtterance(msg);
-speech.rate=0.85;
-speech.pitch=0.7;
-speech.volume=1;
-window.speechSynthesis.speak(speech);
+    let msg="Happy Wedding Anniversary Maruthi and Navya. May your love shine like gold forever.";
+    let speech=new SpeechSynthesisUtterance(msg);
+    speech.rate=0.9;
+    speech.pitch=1;
+    window.speechSynthesis.speak(speech);
 }
 </script>
 
