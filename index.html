@@ -15,120 +15,91 @@
 }
 
 body{
-    background:#000;
     height:100vh;
     overflow:hidden;
     font-family:'Montserrat', sans-serif;
-    display:flex;
-    justify-content:center;
-    align-items:center;
     color:white;
 }
 
-/* Gold shimmer background */
-body::before{
-    content:"";
+/* Full screen luxury background */
+.background{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:
+        linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)),
+        url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=80');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    animation:zoomSlow 20s ease-in-out infinite alternate;
+}
+
+@keyframes zoomSlow{
+    from{transform:scale(1);}
+    to{transform:scale(1.08);}
+}
+
+/* Center content */
+.content{
     position:absolute;
-    width:200%;
-    height:200%;
-    background:linear-gradient(120deg,
-        transparent 40%,
-        rgba(212,175,55,0.08),
-        transparent 60%);
-    animation:shimmer 8s linear infinite;
-}
-
-@keyframes shimmer{
-    from{transform:translateX(-50%) rotate(0deg);}
-    to{transform:translateX(0%) rotate(360deg);}
-}
-
-/* Main Card */
-.card{
-    position:relative;
-    width:90%;
-    max-width:420px;
-    padding:50px 30px;
-    border-radius:25px;
-    background:#0d0d0d;
-    border:1px solid rgba(212,175,55,0.4);
-    box-shadow:0 0 40px rgba(212,175,55,0.2);
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
     text-align:center;
-    overflow:hidden;
+    width:90%;
+    max-width:500px;
+    animation:fadeIn 2s ease forwards;
 }
 
-/* Gold top line animation */
-.card::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:0;
-    width:0%;
-    height:3px;
-    background:#d4af37;
-    animation:lineGrow 2s ease forwards;
-}
-
-@keyframes lineGrow{
-    to{width:100%;}
+@keyframes fadeIn{
+    from{opacity:0; transform:translate(-50%,-45%);}
+    to{opacity:1; transform:translate(-50%,-50%);}
 }
 
 h1{
     font-family:'Playfair Display', serif;
-    font-size:26px;
+    font-size:32px;
+    letter-spacing:4px;
     color:#d4af37;
-    letter-spacing:3px;
-    margin-bottom:20px;
 }
 
-/* Animated names */
 .names{
+    margin-top:15px;
     font-size:28px;
     font-weight:500;
-    opacity:0;
-    transform:translateY(20px);
-    animation:fadeUp 2s 1s forwards;
+    letter-spacing:2px;
 }
 
-@keyframes fadeUp{
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+.gold-line{
+    width:70px;
+    height:2px;
+    background:#d4af37;
+    margin:20px auto;
 }
 
 .message{
-    margin-top:20px;
     font-size:15px;
-    line-height:1.6;
-    color:#ccc;
-    opacity:0;
-    animation:fadeIn 2s 2s forwards;
+    line-height:1.7;
+    color:#e0e0e0;
 }
 
-@keyframes fadeIn{
-    to{opacity:1;}
-}
-
-/* Button */
 button{
     margin-top:30px;
     padding:14px 35px;
     border-radius:30px;
-    border:none;
-    background:#d4af37;
-    color:black;
+    border:1px solid #d4af37;
+    background:transparent;
+    color:#d4af37;
     font-weight:600;
     letter-spacing:1px;
     cursor:pointer;
     transition:0.4s;
-    opacity:0;
-    animation:fadeIn 2s 3s forwards;
 }
 
 button:hover{
-    background:white;
-    transform:scale(1.05);
+    background:#d4af37;
+    color:black;
 }
 
 .final{
@@ -136,7 +107,7 @@ button:hover{
     font-size:16px;
     color:#d4af37;
     opacity:0;
-    transition:0.8s;
+    transition:1s;
 }
 
 .final.show{
@@ -146,20 +117,22 @@ button:hover{
 </head>
 <body>
 
-<div class="card">
-    <h1>HAPPY ANNIVERSARY</h1>
+<div class="background"></div>
 
-    <div class="names">
-        Maruthi & Navya
-    </div>
+<div class="content">
+    <h1>HAPPY WEDDING ANNIVERSARY</h1>
+
+    <div class="names">Maruthi & Navya</div>
+
+    <div class="gold-line"></div>
 
     <div class="message">
-        A journey written in love.  
-        A bond forged in trust.  
-        A story that grows more beautiful with time.
+        A love that grows stronger with time.  
+        A bond that shines brighter than gold.  
+        May your journey together remain timeless and beautiful.
     </div>
 
-    <button onclick="reveal()">CELEBRATE LOVE</button>
+    <button onclick="celebrate()">CELEBRATE</button>
 
     <div class="final" id="final">
         ✨ Forever. Always. Together. ✨
@@ -167,7 +140,7 @@ button:hover{
 </div>
 
 <script>
-function reveal(){
+function celebrate(){
     document.getElementById("final").classList.add("show");
 
     let msg="Happy Wedding Anniversary Maruthi and Navya. May your love shine like gold forever.";
