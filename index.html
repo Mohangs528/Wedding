@@ -3,111 +3,150 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maruthi ❤️ Navya Anniversary</title>
+<title>Maruthi & Navya Anniversary</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
-body{
+*{
     margin:0;
-    font-family:'Poppins', sans-serif;
-    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    height:100vh;
+    background:#0a0a0a;
+    font-family:'Montserrat', sans-serif;
+    color:white;
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
-    color:white;
-    text-align:center;
+    overflow:hidden;
 }
 
+/* Animated Gold Shine Background */
+body::before{
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    background:linear-gradient(
+        120deg,
+        transparent 30%,
+        rgba(212,175,55,0.1),
+        transparent 70%
+    );
+    animation:shine 6s linear infinite;
+}
+
+@keyframes shine{
+    from{transform:translateX(-50%) rotate(0deg);}
+    to{transform:translateX(0%) rotate(360deg);}
+}
+
+/* Card */
 .card{
-    background:rgba(255,255,255,0.15);
-    padding:30px;
+    position:relative;
+    background:#111;
+    padding:50px 40px;
     border-radius:25px;
-    backdrop-filter:blur(10px);
-    box-shadow:0 10px 30px rgba(0,0,0,0.3);
-    max-width:400px;
+    text-align:center;
     width:90%;
-    animation:fadeIn 2s ease;
+    max-width:500px;
+    border:1px solid rgba(212,175,55,0.4);
+    box-shadow:0 0 40px rgba(212,175,55,0.2);
+    animation:fadeIn 1.8s ease;
 }
 
 @keyframes fadeIn{
-    from{opacity:0; transform:translateY(30px);}
+    from{opacity:0; transform:translateY(40px);}
     to{opacity:1; transform:translateY(0);}
 }
 
 h1{
-    font-family:'Great Vibes', cursive;
-    font-size:45px;
-    margin:0;
+    font-family:'Playfair Display', serif;
+    font-size:38px;
+    color:#d4af37;
+    letter-spacing:2px;
 }
 
 .names{
-    font-size:24px;
-    margin:10px 0 20px;
+    margin-top:15px;
+    font-size:22px;
+    font-weight:500;
+    letter-spacing:1px;
 }
 
-/* Working Photo */
-.photo img{
-    width:220px;
-    height:280px;
-    object-fit:cover;
-    border-radius:20px;
-    border:4px solid white;
-    box-shadow:0 0 20px rgba(255,255,255,0.6);
+.line{
+    width:60px;
+    height:2px;
+    background:#d4af37;
+    margin:20px auto;
+}
+
+.message{
+    font-size:16px;
+    line-height:1.6;
+    color:#ddd;
+}
+
+/* Gold Button */
+button{
+    margin-top:30px;
+    padding:14px 35px;
+    border-radius:30px;
+    border:none;
+    background:#d4af37;
+    color:black;
+    font-weight:600;
+    cursor:pointer;
     transition:0.4s;
 }
 
-.photo img:hover{
+button:hover{
+    background:white;
     transform:scale(1.05);
 }
 
-button{
-    margin-top:20px;
-    padding:12px 30px;
-    border:none;
-    border-radius:30px;
-    background:white;
-    color:#ff4e73;
-    font-size:16px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#ff4e73;
-    color:white;
-}
-
-#message{
-    margin-top:15px;
+#final{
     display:none;
+    margin-top:20px;
+    font-size:18px;
+    color:#d4af37;
 }
 </style>
 </head>
 <body>
 
 <div class="card">
-    <h1>Happy Wedding Anniversary</h1>
-    <div class="names">Maruthi ❤️ Navya</div>
+    <h1>HAPPY WEDDING ANNIVERSARY</h1>
 
-    <div class="photo">
-        <!-- Working public image -->
-        <img src="https://picsum.photos/400/500" alt="Couple Photo">
+    <div class="names">Maruthi & Navya</div>
+
+    <div class="line"></div>
+
+    <div class="message">
+        A timeless bond built with love, trust and elegance.  
+        May your journey together continue to shine like gold  
+        and grow more beautiful with every passing year.
     </div>
 
-    <button onclick="wish()">Celebrate Love</button>
+    <button onclick="celebrate()">Celebrate</button>
 
-    <div id="message">
-        💖 May your love grow stronger every year 💖
+    <div id="final">
+        ✨ Forever. Always. Together. ✨
     </div>
 </div>
 
 <script>
-function wish(){
-    document.getElementById("message").style.display="block";
+function celebrate(){
+    document.getElementById("final").style.display="block";
 
-    let msg="Happy Wedding Anniversary Maruthi and Navya. May your love grow stronger every year.";
+    let msg="Happy Wedding Anniversary Maruthi and Navya. May your love shine like gold forever.";
     let speech=new SpeechSynthesisUtterance(msg);
+    speech.rate=0.95;
+    speech.pitch=1;
     window.speechSynthesis.speak(speech);
 }
 </script>
